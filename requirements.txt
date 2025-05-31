@@ -3,4 +3,5 @@ numpy
 scikit-learn
 seaborn
 matplotlib
--e .
+tensorflow
+# -e .
