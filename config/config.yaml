@@ -3,8 +3,8 @@ artifacts_root: artifacts
 
 data_ingestion:
   root_dir: artifacts/data_ingestion
-  source_URL: https://github.com/entbappy/Branching-tutorial/raw/master/Chicken-fecal-images.zip
-  local_data_file: artifacts/data_ingestion/data.zip
+  source_URL: https://github.com/MannPatel250205/Image_caption_Generator/raw/refs/heads/main/artifacts/features.zip
+  local_data_file: artifacts/data_ingestion/features.zip
   unzip_dir: artifacts/data_ingestion
 
 
