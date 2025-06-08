@@ -124,7 +124,7 @@ class Training:
                 vocab_size=self.vocab_size,
                 batch_size=self.config.params_batch_size
             ),
-            epochs=6,
+            epochs=1,
             verbose=1,
             steps_per_epoch=self.steps_per_epoch,
             callbacks=callback_list
