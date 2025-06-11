@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://imagecaptionendtoend.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_b59cf42c851348d79ea4b22699fd9b10 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_840fad3d9d0e49c59a6d2c0740e2392d }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_ee0f8719f6464ffe868027d9b66b4666 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_076afdd315424692b888d63a79210eeb }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: imagecaptionendtoend.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b59cf42c851348d79ea4b22699fd9b10 }}/chicken:${{ github.sha }}
+        tags: imagecaptionendtoend.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_ee0f8719f6464ffe868027d9b66b4666 }}/caption:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'imagecaptionendtoend'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_36b6614ec62d4f7c828ea965f6e51d11 }}
-        images: 'imagecaptionendtoend.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_b59cf42c851348d79ea4b22699fd9b10 }}/chicken:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_9b992a2b94014842bc80962194ca43b8 }}
+        images: 'imagecaptionendtoend.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_ee0f8719f6464ffe868027d9b66b4666 }}/caption:${{ github.sha }}'
