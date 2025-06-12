@@ -7,11 +7,11 @@
 
 ## Run from terminal:
 
-docker build -t imagecaptionendtoend.azurecr.io/chicken:latest .
+docker build -t imagecaptionendtoend.azurecr.io/caption:latest .
 
 docker login imagecaptionendtoend.azurecr.io
 
-docker push imagecaptionendtoend.azurecr.io/chicken:latest
+docker push imagecaptionendtoend.azurecr.io/caption:latest
 
 
 ## Deployment Steps:
