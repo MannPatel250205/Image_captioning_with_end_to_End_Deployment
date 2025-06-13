@@ -16,3 +16,98 @@ stages:
       hash: md5
       md5: 7c59af15705a5a47b56a8c7ce0092c82
       size: 133064982
+  prepare_base_model:
+    cmd: python src/Model/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: e523add0b9b1d9bbbae69fcc6ebd833e
+      size: 861
+    - path: src/Model/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: ba25b188e902ccd3a140ddefb4a8a1fa
+      size: 975
+    params:
+      params.yaml:
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: 0ceca1b015f44a6839855d9823b91f05.dir
+      size: 561139464
+      nfiles: 2
+  training:
+    cmd: python src/Model/pipeline/stage_03_training.py
+    deps:
+    - path: artifacts/data_ingestion/features.pkl
+      hash: md5
+      md5: 7c59af15705a5a47b56a8c7ce0092c82
+      size: 133064982
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: 0ceca1b015f44a6839855d9823b91f05.dir
+      size: 561139464
+      nfiles: 2
+    - path: config/config.yaml
+      hash: md5
+      md5: e523add0b9b1d9bbbae69fcc6ebd833e
+      size: 861
+    - path: src/Model/components/prepare_callbacks.py
+      hash: md5
+      md5: f0aec9daef4c8ce4ee9d73404e445325
+      size: 998
+    - path: src/Model/pipeline/stage_03_training.py
+      hash: md5
+      md5: 36956a7691abc813e56f022821a0c68e
+      size: 1234
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 1
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: artifacts/training/best_model.keras
+      hash: md5
+      md5: 78bf6d679507ff23eb668c9cf834efa7
+      size: 71963390
+  evaluation:
+    cmd: python src/Model/pipeline/stage_04_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/features.pkl
+      hash: md5
+      md5: 7c59af15705a5a47b56a8c7ce0092c82
+      size: 133064982
+    - path: artifacts/training/best_model.keras
+      hash: md5
+      md5: 78bf6d679507ff23eb668c9cf834efa7
+      size: 71963390
+    - path: config/config.yaml
+      hash: md5
+      md5: e523add0b9b1d9bbbae69fcc6ebd833e
+      size: 861
+    - path: src/Model/pipeline/stage_04_evaluation.py
+      hash: md5
+      md5: 2b75d9a240b1f91c457f0ce6b35e708e
+      size: 859
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: e749469e6e2ca10e6c68bf1aef154dba
+      size: 71
